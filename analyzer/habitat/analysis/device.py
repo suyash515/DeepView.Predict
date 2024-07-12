@@ -1,7 +1,3 @@
-
-
-# This singleton class simulates an enum that consists of the GPU devices we
-# support. Users can access a device using its identifier (e.g., Device.V100).
 class _Device:
     def __init__(self):
         self._devices = None
@@ -22,3 +18,11 @@ class _Device:
             device_name: hc.DeviceProperties(name=device_name, **properties)
             for device_name, properties in devices.items()
         }
+
+    def get_all_devices(self):
+        '''
+        Load all devices and return the device data.
+        '''
+        if self._devices is None:
+            self._load_devices()
+        return self._devices
